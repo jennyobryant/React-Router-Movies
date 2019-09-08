@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import ReactDom from 'react-dom'; //1. import ReactDom
-
 import { Route } from "react-router-dom";//1. import route 
 
 
