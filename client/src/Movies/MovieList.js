@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { Link } from 'react-router-dom'; //1. import link 
+
 const MovieList = props => {
   const [movies, setMovies] = useState([])
   useEffect(() => {
@@ -18,18 +20,22 @@ const MovieList = props => {
     getMovies();
   }, []);
   
-  return (
+  return (//2. make card in movieList is a link, direct the user to the /movies/{id of movie here}
     <div className="movie-list">
       {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
+        <Link to = { `/movies/${movie.id}`}>
+          <MovieDetails key={movie.id} movie={movie} />
+        </Link>
       ))}
     </div>
+   
   );
 }
 
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
-  return (
+  return (//when a user click on a movie card they should taken to /movie/{id of movie here} to see the details for the selected movie
+    <Link to = { `/movies/${movie.id}`} key = {movie.id}>
     <div className="movie-card">
       <h2>{title}</h2>
       <div className="movie-director">
@@ -44,8 +50,10 @@ function MovieDetails({ movie }) {
         <div key={star} className="movie-star">
           {star}
         </div>
+        
       ))}
     </div>
+    </Link>
   );
 }
 
